@@ -1,0 +1,44 @@
+@analyze_option{
+    strategy = DepthFS;
+    ana_kind = prefix;
+    use_locfront = false;
+    goal = WeakPass
+}
+@message{
+    connect;connack;
+    pub_qos0;pub_qos1;pub_qos2;puback;pubrec;pubrel;pubcomp;
+    subscribe;suback;
+    unsubscribe;unsuback;
+    disconnect
+}
+@lifeline{
+    client;broker
+}
+seq(
+    client -- connect -> broker,
+    broker -- connack -> client,
+    loopP(
+        alt(
+            client -- pub_qos0 -> broker,
+            seq(
+                client -- pub_qos1 -> broker,
+                broker -- puback -> client
+            ),
+            seq(
+                client -- pub_qos2 -> broker,
+                broker -- pubrec -> client,
+                client -- pubrel -> broker,
+                broker -- pubcomp -> client
+            ),
+            seq(
+                client -- subscribe -> broker,
+                broker -- suback -> client
+            ),
+            seq(
+                client -- unsubscribe -> broker,
+                broker -- unsuback -> client
+            )
+        )
+    ),
+    client -- disconnect -> broker
+)

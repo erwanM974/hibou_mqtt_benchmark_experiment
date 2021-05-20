@@ -48,11 +48,11 @@ case in the symbolic case. We briefly explain the reason why in the following.
 
 It suffices to consider the simple example below:
 
-<img src="./README_images/ex_loop_par_fail_rw_long.svg" alt="hibou banner" width="1000">
+<img src="./README_images/ex_loop_par_fail_rw_long.svg" alt="hibou banner" width="1200">
 
-We can see that, given that the three instances of the reception event "l2?m1" are indistinguihsable, the analysis must explore all possibilities so as to make sure that the trace is non-conform.
+We can see that, given that the three instances of the reception event "l2?m1" are indistinguishable, the analysis must explore all possibilities so as to make sure that the trace is non-conform.
 
 By contrast, when considering an interaction model enriched with data, the reception events "l2?m1(12)", "l2?m1(55)" and "l2?m1(76)" become distinguishable and the size of the graph that needs to be explored to prove non-conformance is reduced. This reduction in size is exponential with the number of successive emissions of "m1" which exactly mitigates the aformentioned exponential increase in the labelled case.
 
-<img src="./README_images/ex_loop_par_symb_fail_rw_long.svg" alt="hibou banner" width="650">
+<img src="./README_images/ex_loop_par_symb_fail_rw_long.svg" alt="hibou banner" width="750">
 
